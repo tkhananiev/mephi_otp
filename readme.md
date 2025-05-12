@@ -15,7 +15,7 @@
 
    ```bash
    git clone https://github.com/tkhananiev/mephi_otp.git
-   cd otp
+   cd mephi_otp
 
    docker-compose up --build
    ```
