@@ -1,0 +1,72 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: otp
+  datasource:
+    url: "${DB_URL:jdbc:postgresql://localhost:5432/exam_db}"
+    username: "${DB_USERNAME:admin}"
+    password: "${DB_PASSWORD:admin}"
+    driverClassName: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+
+  mail:
+    host: "${SMTP_HOST:}"
+    port: "${SMTP_PORT:}"
+    username: "${EMAIL_USERNAME:}"
+    password: "${EMAIL_PASSWORD:}"
+    test-connection: false
+    properties:
+      health:
+        mail:
+          enabled: false
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enabled: true
+
+notification:
+  smpp:
+    host: "${SMPP_HOST:}"
+    port: "${SMPP_PORT:}"
+    system_id: "${SMPP_SYSTEM_ID:}"
+    password: "${SMPP_PASSWORD:}"
+    system_type: "${SMPP_SYSTEM_TYPE:}"
+    source_addr: "${SMPP_SOURCE_ADDR:}"
+  telegram:
+    bot:
+      token: "${TELEGRAM_TOKEN:}"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+  health:
+    mail:
+      enabled: false
+
+security:
+  token:
+    signing:
+      key: 53A73E5F1C4E0A2D3B5F2D784E6A1B423D6F247D1F6E5C3A596D635A75327855
+    expiration:
+      milliseconds: 144000000
+
+default:
+  configuration:
+    expirationTime: 6000000
+    length: 5
+  user:
+    admin:
+      username: "${FIRST_ADMIN_USERNAME:admin}"
+      password: "${FIRST_ADMIN_PASSWORD:admin123}"
